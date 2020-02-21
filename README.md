@@ -19,3 +19,4 @@
 ## Some other stuff
     This program was written in the Code::Blocks IDE, and compiled using GCC.
     If you want to compile it yourself, make sure to set the C++11 compiler flag as well.
+    This probably only works on Windows.
