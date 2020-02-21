@@ -19,29 +19,29 @@ int main()
 	srand(time(NULL));
 
 	// Get console handle & set up colours.
-    // Colours may look different on some computers.
-    HANDLE consHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    const int COMP_COLOUR = 15, USER_COLOUR = 3;
-    SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+	// Colours may look different on some computers.
+	HANDLE consHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	const int COMP_COLOUR = 15, USER_COLOUR = 3;
+	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
 
-    const string STARTPATH = "Resources/jokes_start.txt", FINISHPATH = "Resources/jokes_end.txt";
+	const string STARTPATH = "Resources/jokes_start.txt", FINISHPATH = "Resources/jokes_end.txt";
 
 	int userChoice = 1;
 	string textBuffer = "";
-    cout << "Would you like to Hear (1) a joke, or Add (2) one to my memory?" << endl;
-    cout << "Enter your choice: ";
-    //SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    getline(cin, textBuffer);
-    if (textBuffer != "1") // Don't let the user break the program by not entering a number.
+	cout << "Would you like to Hear (1) a joke, or Add (2) one to my memory?" << endl;
+	cout << "Enter your choice: ";
+	//SetConsoleTextAttribute(consHandle, USER_COLOUR);
+	getline(cin, textBuffer);
+	if (textBuffer != "1") // Don't let the user break the program by not entering a number.
 	{
 		textBuffer = "2";
 	}
-    userChoice = stoi(textBuffer);
-    //SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+	userChoice = stoi(textBuffer);
+	//SetConsoleTextAttribute(consHandle, COMP_COLOUR);
 
-    //string userResponse = "";
+	//string userResponse = "";
 
-    // Read in from text files
+	// Read in from text files
 	ifstream bankFirst(STARTPATH);
 	ifstream bankLast(FINISHPATH);
 	map<string, int> jokeStarts; // Key is the joke start, value is how "funny" it is.
@@ -73,9 +73,9 @@ int main()
 		jokeEnds[joke] = funnyness;
 	}
 
-    // User wants to hear a joke.
-    if (userChoice == 1)
-    {
+	// User wants to hear a joke.
+	if (userChoice == 1)
+	{
 		// Turn the maps into vectors so that it's easier to pick one at random. Funnyness values are the weight of each joke part.
 		vector<string> jokeStartsVect, jokeEndsVect;
 		for (map<string, int>::iterator i = jokeStarts.begin(); i != jokeStarts.end(); i++)
@@ -102,21 +102,25 @@ int main()
 
 		// Tell the joke and ask whether it was funny. The idea is that the jokes the user likes will be told more
 		// And since parts of different jokes can be combined, the computer will create a new joke that is theoretically funny.
-    	SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    	cout << "Let's hear a joke." << endl;
-    	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
-    	cout << "Knock knock." << endl << "Enter your response: ";
-    	// Note: This merely presents the user with the illusion of choice. They will respond, "Who's there?" regardless of what they actually want.
+		SetConsoleTextAttribute(consHandle, USER_COLOUR);
+		cout << "Let's hear a joke." << endl;
+		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+		cout << "Knock knock." << endl
+			 << "Enter your response: ";
+		// Note: This merely presents the user with the illusion of choice. They will respond, "Who's there?" regardless of what they actually want.
 		getline(cin, textBuffer);
 		SetConsoleTextAttribute(consHandle, USER_COLOUR);
 		cout << "Who's there?" << endl;
 		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
-		cout << starter << "." << endl << "Enter your response: ";
+		cout << starter << "." << endl
+			 << "Enter your response: ";
 		getline(cin, textBuffer);
 		SetConsoleTextAttribute(consHandle, USER_COLOUR);
 		cout << starter << " who?" << endl;
 		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
-		cout << starter << " " << punchline << endl << "...was that funny?" << endl << "Enter your response: ";
+		cout << starter << " " << punchline << endl
+			 << "...was that funny?" << endl
+			 << "Enter your response: ";
 		getline(cin, textBuffer);
 
 		// Is the joke funny?
@@ -151,40 +155,40 @@ int main()
 		}
 		startersFile.close();
 		punchlinesFile.close();
-    }
-    // User wants to enter a joke.
-    else
+	}
+	// User wants to enter a joke.
+	else
 	{
 		SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    	cout << "I'll tell you a joke." << endl;
-    	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+		cout << "I'll tell you a joke." << endl;
+		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
 		cout << "Start the joke: "; // Once again, the user is railroaded into following the structure of a knock knock joke.
 		getline(cin, textBuffer);
 		SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    	cout << "Knock knock." << endl;
+		cout << "Knock knock." << endl;
 
-    	// Start of the Joke
-    	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
-    	cout << "Who's there?" << endl;
-    	cout << "Enter your response: ";
-    	getline(cin, textBuffer);
-    	SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    	string starter = textBuffer;
-    	cout << starter << "." << endl;
-    	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
-    	cout << starter << " who?" << endl;
+		// Start of the Joke
+		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+		cout << "Who's there?" << endl;
+		cout << "Enter your response: ";
+		getline(cin, textBuffer);
+		SetConsoleTextAttribute(consHandle, USER_COLOUR);
+		string starter = textBuffer;
+		cout << starter << "." << endl;
+		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+		cout << starter << " who?" << endl;
 
-    	// Joke punchline.
-    	cout << "Enter your response (Do not include the joke starter): ";
-    	getline(cin, textBuffer);
-    	string punchline = textBuffer;
-    	SetConsoleTextAttribute(consHandle, USER_COLOUR);
-    	cout << starter << " " << punchline << endl;
-    	SetConsoleTextAttribute(consHandle, COMP_COLOUR);
+		// Joke punchline.
+		cout << "Enter your response (Do not include the joke starter): ";
+		getline(cin, textBuffer);
+		string punchline = textBuffer;
+		SetConsoleTextAttribute(consHandle, USER_COLOUR);
+		cout << starter << " " << punchline << endl;
+		SetConsoleTextAttribute(consHandle, COMP_COLOUR);
 
-    	// Add joke to the library if it's not already there
-    	bool writeStart = false, writeEnd = false;
-    	if (jokeStarts.count(starter) < 1) // Starter doesn't exist
+		// Add joke to the library if it's not already there
+		bool writeStart = false, writeEnd = false;
+		if (jokeStarts.count(starter) < 1) // Starter doesn't exist
 		{
 			writeStart = true;
 			if (jokeEnds.count(punchline) < 1) // Punchline doesn't exist
@@ -242,5 +246,5 @@ int main()
 
 	cout << "Press ENTER to exit...";
 	getline(cin, textBuffer);
-    return 0;
+	return 0;
 }
